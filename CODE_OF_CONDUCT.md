@@ -60,7 +60,7 @@ representative at an online or offline event.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the community leaders responsible for enforcement at
-[ADD_YOUR_MAIL@YOUR_SERVICE.de](mailto:ADD_YOUR_MAIL@YOUR_SERVICE.de). Reports related 
+[digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de). Reports related 
 to the community leaders can be sent together with information about the involved 
 community leaders to [hallo@digitalservice.bund.de](mailto:hallo@digitalservice.bund.de).
 All complaints will be reviewed and investigated promptly and fairly.
