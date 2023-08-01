@@ -5,7 +5,7 @@ to be used for evaluation and analysis purposes.
 
 ## Contributing
 
-🇬🇧
+🇬🇧  
 Everyone is welcome to contribute the development of the _Digitalcheck Data_. You can contribute by opening pull request, 
 providing documentation or answering questions or giving feedback. Please always follow the guidelines and our 
 [Code of Conduct](CODE_OF_CONDUCT.md).
@@ -16,7 +16,7 @@ indem du Pull-Requests eröffnest, die Dokumentation erweiterst, Fragen beantwor
 Bitte befolge immer die Richtlinien und unseren [Verhaltenskodex](CODE_OF_CONDUCT_DE.md).
 
 ## Contributing code
-🇬🇧 
+🇬🇧   
 Open a pull request with your changes and it will be reviewed by someone from the team. When you submit a pull request, 
 you declare that you have the right to license your contribution to the DigitalService and the community. 
 By submitting the patch, you agree that your contributions are licensed under the MIT license.
