@@ -1,0 +1,12 @@
+{
+  "name": "parse-pdfs-with-adobe-sdk",
+  "version": "3.4.0",
+  "description": "Parse PDFs using the Adobe SDK",
+  "author": "Adobe",
+  "license": "MIT",
+  "dependencies": {
+    "@adobe/pdfservices-node-sdk": "3.4.0",
+    "decompress": "^4.2.1",
+    "fs": "^0.0.1-security"
+  }
+}
