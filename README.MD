@@ -5,6 +5,15 @@ to be used for evaluation and analysis purposes.
 
 ⚠️ **Be warned:** The scripts in this repository are mostly work in progress.
 
+## Scripts
+
+The `scripts` directory contains the different scripts to parse PDF documents using different technologies:
+
+- `scripts/convert`: Bash script(s) to convert PDF documents to different formats using
+[ghostscript](https://www.ghostscript.com/) and [xpdf](https://www.xpdfreader.com/)
+- `scripts/extract`: Node.js script(s) to extract data from PDF documents using the 
+[Adobe PDF Services API](https://developer.adobe.com/document-services/docs/overview/pdf-services-api/)
+
 ## Contributing
 
 🇬🇧  
