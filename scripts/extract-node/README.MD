@@ -1,6 +1,6 @@
 # Parse PDFs using Adobe PDF Services API
 
-## Extract Data from PDF
+## Extract data from PDF
 
 The `extract-data-from-pdf.js` script can be used to extract data from PDF files.
 
