@@ -11,8 +11,6 @@ The `convert.sh` script can be used to convert PDF files to other formats like P
 
 ### Usage
 
-Run:
-
 ```
-./convert.sh ../resources/test/digitalcheck-example.pdf
+./convert.sh <path-to-pdf>
 ```
