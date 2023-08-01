@@ -1,5 +1,8 @@
 # Real Digitalcheck documents
 resources/real
 
+# Output
+**/output
+
 # IntelliJ
 .idea
