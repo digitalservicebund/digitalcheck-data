@@ -3,7 +3,7 @@
 This repository contains scripts to automatically extract data from Digitalcheck documents (PDF) 
 to be used for evaluation and analysis purposes.
 
-:warning: **Be warned:** The scripts in this repository are mostly work in progress.
+⚠️ **Be warned:** The scripts in this repository are mostly work in progress.
 
 ## Contributing
 
