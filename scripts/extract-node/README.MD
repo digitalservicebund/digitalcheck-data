@@ -1,6 +1,6 @@
-# Parse PDFs using Adobe PDF Services API
+# Extract data from PDF documents
 
-## Extract data from PDF
+## Extract text from PDF
 
 The `extract-data-from-txt.js` script can be used to extract data from text files.
 
@@ -13,13 +13,13 @@ npm i
 ### Usage
 
 ```
-node extract-data-from-txt.js -i <path-to-input-path> -o <path-to-output-path>
+node extract-data-from-txt.js -i <path-to-input-path> -o <path-to-output-file>
 ```
 
 
-## Extract data from PDF
+## Extract JSON from PDF 
 
-The `extract-data-from-pdf.js` script can be used to extract data from PDF files.
+The `extract-data-from-pdf.js` script can be used to extract data from PDF files using the [Adobe PDF Services API](https://developer.adobe.com/document-services/docs/overview/pdf-services-api/).
 
 ### Authentication
 

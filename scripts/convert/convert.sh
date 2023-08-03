@@ -25,7 +25,8 @@ _parse_options() {
 }
 
 _help() {
-  echo "Usage: ./convert-to-text.sh"
+  echo "Usage: ./convert.sh"
+  echo "Convert the given PDF document into another format (supported are text, PDF/A and PostScript)."
   echo ""
   echo "Available options:"
   echo "-i                Input file"
@@ -35,6 +36,9 @@ _help() {
 }
 
 _parse_options "$@"
+
+OUTPUT_DIR="$(dirname "${OUTPUT_FILE}")"
+mkdir -p "$OUTPUT_DIR"
 
 case $OUTPUT_FORMAT in
   txt)
