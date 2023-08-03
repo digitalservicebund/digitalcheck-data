@@ -14,7 +14,9 @@ This directory contains scripts to parse PDF documents:
 
 ## Parse 
 
-Parse all Digitalcheck PDF documents in a given directory.
+The `parse.sh` script can be used to parse all Digitalcheck PDF documents in a given directory and 
+extract data in JSON format. It uses the `convert/convert.sh` script to convert the PDF document to text 
+and the `extract-node/extract-data-from-text.js` script to extract data from the text.
 
 ### Prerequisites
 
