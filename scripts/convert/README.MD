@@ -6,11 +6,12 @@ The `convert.sh` script can be used to convert PDF files to other formats like P
 
 ### Prerequisites
 
-- [ghostscript](https://www.ghostscript.com/)
-- [xpdf](https://www.xpdfreader.com/)
+- [xpdf](https://www.xpdfreader.com/) (for conversion to text or PostScript)
+- [ghostscript](https://www.ghostscript.com/) (for conversion to PDF/A)
 
 ### Usage
 
 ```
-./convert.sh <path-to-pdf>
+./convert.sh -i <input-file> -o <output-file> -f <output-format>
 ```
+*Note: Use one of the following formats: txt, ps, pdfa*
