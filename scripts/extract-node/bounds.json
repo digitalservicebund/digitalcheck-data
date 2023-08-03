@@ -1,0 +1,47 @@
+[
+  {
+    "name": "title",
+    "lowerBound": "Titel der Regelung",
+    "upperBound": "Der Vollzug der Regelung wird voraussichtlich"
+  },
+  {
+    "name": "preCheckExplanation",
+    "lowerBound": "Bitte erläutern Sie hier das Ergebnis:",
+    "upperBound": "*Beteiligte sind in diesem Zusammenhang"
+  },
+  {
+    "name": "impactOnExecution",
+    "lowerBound": "formelle Beteiligungsverfahren.",
+    "upperBound": "Wie spiegeln sich die Erkenntnisse"
+  },
+  {
+    "name": "impactOnRule",
+    "lowerBound": "die zum Beispiel den Vollzug regeln.",
+    "upperBound": "12"
+  },
+  {
+    "name": "principle1",
+    "lowerBound": "Zum Beispiel: “Online-Beratung wird ermöglicht, siehe § 1a (2)”.Ja Nein Teilweise Nicht relevantErläuterung:",
+    "upperBound": "13Prinzip 2"
+  },
+  {
+    "name": "principle2",
+    "lowerBound": "Zum Beispiel: “Datenstandard definiert, siehe § 3a, rechtliche Voraussetzung zum Datenaustausch geschaffen, siehe § 3b”.Ja Nein Teilweise Nicht relevantErläuterung:",
+    "upperBound": "14Prinzip 3"
+  },
+  {
+    "name": "principle3",
+    "lowerBound": "Zum Beispiel: “Bedingungen für die Verwendung von Kontaktdaten, siehe § 1a (2)”.Ja Nein Teilweise Nicht relevantErläuterung:",
+    "upperBound": "15Prinzip 4"
+  },
+  {
+    "name": "principle4",
+    "lowerBound": "Zum Beispiel: “Hinweis auf Begriffsdefinitionen, siehe § 1a (2); Voraussetzungen, Pauschalen und Freibeträge für Leistungsbezug definiert, siehe § 5”.Ja Nein Teilweise Nicht relevantErläuterung:",
+    "upperBound": "16Prinzip 5"
+  },
+  {
+    "name": "principle5",
+    "lowerBound": " Zum Beispiel: “Verzicht auf persönliches Erscheinen, siehe § 4”.Ja Nein Teilweise Nicht relevantErläuterung:",
+    "upperBound": "Das passiert als Nächstes"
+  }
+]
