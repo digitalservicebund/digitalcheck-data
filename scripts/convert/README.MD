@@ -1,6 +1,6 @@
 # Scripts
 
-## Convert PDFs
+## Convert PDF
 
 The `convert.sh` script can be used to convert PDF files to other formats like PostScript, text and PDF/A.
 
