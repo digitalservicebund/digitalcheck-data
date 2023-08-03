@@ -12,12 +12,12 @@ if (!args.hasOwnProperty('i')) {
     process.exit(1);
 }
 if (!args.hasOwnProperty('o')) {
-    console.error('Output path must be specified with -o');
+    console.error('Output file must be specified with -o');
     process.exit(1);
 }
 
 let inputPath = args.i
-let outputPath = args.o
+let outputFile = args.o
 
 try {
     fs.readdir(inputPath, (err, files) => {
@@ -35,7 +35,7 @@ try {
         });
 
         data = JSON.stringify(data);
-        fs.writeFileSync(outputPath + '/data.json', data);
+        fs.writeFileSync(outputFile, data);
     });
 
 } catch (err) {
