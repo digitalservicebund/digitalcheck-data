@@ -2,6 +2,23 @@
 
 ## Extract data from PDF
 
+The `extract-data-from-txt.js` script can be used to extract data from text files.
+
+### Install
+
+```
+npm i
+```
+
+### Usage
+
+```
+node extract-data-from-txt.js -i <path-to-input-path> -o <path-to-output-path>
+```
+
+
+## Extract data from PDF
+
 The `extract-data-from-pdf.js` script can be used to extract data from PDF files.
 
 ### Authentication
