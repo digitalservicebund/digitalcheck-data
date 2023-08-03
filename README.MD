@@ -5,16 +5,10 @@ to be used for evaluation and analysis purposes.
 
 ⚠️ **Be warned:** The scripts in this repository are mostly work in progress.
 
-## Scripts
+## Overview
 
-The `scripts` directory contains the different scripts to parse PDF documents using different technologies:
-
-- `scripts/convert`: Bash script(s) to convert PDF documents to different formats using
-[ghostscript](https://www.ghostscript.com/) and [xpdf](https://www.xpdfreader.com/)
-- `scripts/extract-node`: Node.js script(s) to extract data from PDF documents using the 
-[Adobe PDF Services API](https://developer.adobe.com/document-services/docs/overview/pdf-services-api/)
-- `scripts/extract-python`: Python script(s) to extract data from PDF documents using 
-[pypdf](https://pypdf.readthedocs.io/en/stable/index.html)
+* The `scripts` directory contains the different scripts to parse Digitalcheck PDF documents.
+* The `resources` directory contains the Digitalcheck PDF documents.
 
 ## Contributing
 
