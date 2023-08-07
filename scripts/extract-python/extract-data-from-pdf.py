@@ -29,18 +29,34 @@ def create_output_directory(output_file):
 
 def parse_pdf(input_file, output_file):
     with pdfplumber.open(input_file) as pdf:
-        data = {
+        radio_button_data = {
             'principle1Radio': extract_answer_on_page(pdf.pages[12]),
             'principle2Radio': extract_answer_on_page(pdf.pages[13]),
             'principle3Radio': extract_answer_on_page(pdf.pages[14]),
             'principle4Radio': extract_answer_on_page(pdf.pages[15]),
             'principle5Radio': extract_answer_on_page(pdf.pages[16])
         }
+        checkbox_data = extract_pre_check_answers(pdf.pages[3])
+        data = radio_button_data | checkbox_data
 
         json_file = open(output_file, "w")
         json_field = json.dumps(data)
         json_file.write(json_field)
         json_file.close()
+
+
+def extract_pre_check_answers(page):
+    checkboxes = [rect for rect in page.rects if rect["width"] < 10 and rect["height"] < 10]
+    result = {}
+
+    for i, checkbox in enumerate(checkboxes):
+        # Crop the page to contain just the checkbox rectangle.
+        cropped = page.crop((checkbox["x0"], checkbox["top"], checkbox["x1"], checkbox["bottom"]))
+
+        # If the cropped page has a character, it's the checkmark
+        result['preCheck' + str(i + 1)] = len(cropped.chars) > 0
+
+    return result
 
 
 def extract_answer_on_page(page):
