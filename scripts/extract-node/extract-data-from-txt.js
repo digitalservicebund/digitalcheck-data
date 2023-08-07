@@ -46,14 +46,9 @@ try {
         });
 
         if (outputFormat === 'json') {
-            data = JSON.stringify(data);
-            fs.writeFileSync(outputFile, data);
+            saveToJsonFile(data, outputFile);
         } else if (outputFormat === 'csv') {
-            const csv = new ObjectsToCsv(data);
-            await csv.toDisk(outputFile);
-        } else {
-            console.error('Unknown output format ' + outputFormat);
-            process.exit(1);
+            saveToCsvFile(data, outputFile)
         }
     });
 
@@ -65,14 +60,22 @@ function parseFile(file) {
     let inputText = fs.readFileSync(file, 'utf8');
     inputText = inputText.replace(/(\r\n|\n|\r|\f)/gm, "");
 
-    let result = {
-        dcVersion: '1.2'
-    }
+    let textData = {}
     bounds.forEach(bound => {
-        result[bound.name] = extractText(bound.lowerBound, bound.upperBound, inputText)
+        textData[bound.name] = extractText(bound.lowerBound, bound.upperBound, inputText)
     })
 
-    return result;
+    let respectiveDataFile = file.replace('.txt', '_data.json')
+    let checkboxAndRadioData = JSON.parse(fs.readFileSync(respectiveDataFile));
+
+    console.log(textData);
+    console.log(checkboxAndRadioData);
+
+    return {
+        dcVersion: '1.2',
+        ...textData,
+        ...checkboxAndRadioData
+    };
 }
 
 function extractText(lowerBound, upperBound, txt) {
@@ -81,4 +84,14 @@ function extractText(lowerBound, upperBound, txt) {
     let r = txt.match(re);
     if (r)
         return r[1].trim()
+}
+
+function saveToJsonFile(data, outputFile) {
+    data = JSON.stringify(data);
+    fs.writeFileSync(outputFile, data);
+}
+
+async function saveToCsvFile(data, outputFile) {
+    const csv = new ObjectsToCsv(data);
+    await csv.toDisk(outputFile);
 }
