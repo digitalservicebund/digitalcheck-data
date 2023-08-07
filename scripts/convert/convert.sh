@@ -53,7 +53,7 @@ case $OUTPUT_FORMAT in
 
   pdfa)
     # Convert to PDF/A
-    gs -dPDFA -dBATCH -dNOPAUSE -dNOOUTERSAVE -dUseCIEColor -sProcessColorModel=DeviceCMYK -sDEVICE=pdfwrite -sPDFACompatibilityPolicy=1 -sOutputFile="${OUTPUT_FILE}" "${INPUT_FILE}"
+    gs -q -dPDFA -dBATCH -dNOPAUSE -dNOOUTERSAVE -sProcessColorModel=DeviceCMYK -sDEVICE=pdfwrite -sPDFACompatibilityPolicy=1 -sOutputFile="${OUTPUT_FILE}" "${INPUT_FILE}"
     ;;
 
   *)
