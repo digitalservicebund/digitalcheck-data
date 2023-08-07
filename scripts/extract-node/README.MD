@@ -13,7 +13,7 @@ npm i
 ### Usage
 
 ```
-node extract-data-from-txt.js -i <path-to-input-path> -o <path-to-output-file>
+node extract-data-from-txt.js -i <path-to-input-path> -o <path-to-output-file> -f <output-format>
 ```
 
 
