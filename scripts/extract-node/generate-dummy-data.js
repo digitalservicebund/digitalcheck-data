@@ -37,6 +37,7 @@ function generateRow() {
         dateRuleReceived: getRandomDate(),
         datePreCheckReceived: getRandomDate(),
         dateDCReceived: getRandomDate(),
+        dcVersion: '1.2',
 
         title: getRandomTextInRange(2, 8),
 
