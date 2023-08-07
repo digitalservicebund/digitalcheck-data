@@ -10,6 +10,8 @@
     "decompress": "^4.2.1",
     "escape-string-regexp": "^5.0.0",
     "fs": "^0.0.1-security",
-    "minimist": "^1.2.8"
+    "lorem-ipsum": "^2.0.8",
+    "minimist": "^1.2.8",
+    "objects-to-csv": "^1.3.6"
   }
 }
