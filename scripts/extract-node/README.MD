@@ -44,3 +44,20 @@ npm i
 ```
 node extract-data-from-pdf.js <path-to-pdf>
 ```
+
+## Generate dummy data
+
+The `generate-dummy-data.js` script can be used to generate dummy data. The data includes NKR metadata and 
+data from the Digitalcheck documents.
+
+### Install
+
+```
+npm i
+```
+
+### Usage
+
+```
+node generate-dummy-data.js
+```
