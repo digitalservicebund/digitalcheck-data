@@ -4,6 +4,7 @@ import escapeStringRegexp from 'escape-string-regexp';
 import * as fs from 'fs';
 import bounds from './bounds.json' assert { type: 'json' };
 import minimist from 'minimist';
+import ObjectsToCsv from "objects-to-csv";
 
 const args = minimist(process.argv.slice(2));
 
@@ -18,9 +19,19 @@ if (!args.hasOwnProperty('o')) {
 
 let inputPath = args.i
 let outputFile = args.o
+let outputFormat = 'json'
+
+if (args.hasOwnProperty('f')) {
+    outputFormat = args.f
+    if (outputFormat !== 'json' && outputFormat !== 'csv') {
+        console.error('Output format must be json or csv');
+        process.exit(1);
+    }
+}
+
 
 try {
-    fs.readdir(inputPath, (err, files) => {
+    fs.readdir(inputPath, async (err, files) => {
         if (err) {
             return console.log('Unable to scan directory: ' + err);
         }
@@ -34,8 +45,16 @@ try {
             }
         });
 
-        data = JSON.stringify(data);
-        fs.writeFileSync(outputFile, data);
+        if (outputFormat === 'json') {
+            data = JSON.stringify(data);
+            fs.writeFileSync(outputFile, data);
+        } else if (outputFormat === 'csv') {
+            const csv = new ObjectsToCsv(data);
+            await csv.toDisk(outputFile);
+        } else {
+            console.error('Unknown output format ' + outputFormat);
+            process.exit(1);
+        }
     });
 
 } catch (err) {
@@ -46,7 +65,9 @@ function parseFile(file) {
     let inputText = fs.readFileSync(file, 'utf8');
     inputText = inputText.replace(/(\r\n|\n|\r|\f)/gm, "");
 
-    let result = {}
+    let result = {
+        dcVersion: '1.2'
+    }
     bounds.forEach(bound => {
         result[bound.name] = extractText(bound.lowerBound, bound.upperBound, inputText)
     })
