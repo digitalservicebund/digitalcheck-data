@@ -5,7 +5,7 @@ export NODE_NO_WARNINGS=1
 INPUT_PATH=""
 OUTPUT_FILE=""
 OUTPUT_FORMAT=""
-TXT_OUTPUT_PATH="output"
+OUTPUT_PATH="output"
 
 _parse_options() {
   while getopts ":hi:o:f:" option; do
@@ -52,18 +52,20 @@ do
 
   input_file_name="$(basename -- "$input_file")"
   input_file_name=${input_file_name%".pdf"}
-  output_file="$TXT_OUTPUT_PATH/$input_file_name.txt"
+  output_file_txt="$OUTPUT_PATH/$input_file_name.txt"
+  output_file_pdfa="$OUTPUT_PATH/$input_file_name.a.pdf"
+  output_file_data="$OUTPUT_PATH/${input_file_name}_data.json"
 
-  ./convert/convert.sh -i "$input_file" -o "$output_file" -f "txt"
+  ./convert/convert.sh -i "$input_file" -o "$output_file_txt" -f "txt"
+  ./convert/convert.sh -i "$input_file" -o "$output_file_pdfa" -f "pdfa"
+
+  echo "Read checkboxes and radio buttons from $input_file"
+  python ./extract-python/extract-data-from-pdf.py -i "$output_file_pdfa" -o "$output_file_data"
 done
 
-set -x
-
 echo ""
-echo "Extracting data from all inout_files..."
-node ./extract-node/extract-data-from-txt.js -i "$TXT_OUTPUT_PATH" -o "$OUTPUT_FILE" -f "$OUTPUT_FORMAT"
-
-set +x
+echo "Extracting data from all input files..."
+node ./extract-node/extract-data-from-txt.js -i "$OUTPUT_PATH" -o "$OUTPUT_FILE" -f "$OUTPUT_FORMAT"
 
 echo ""
 echo "Done"
