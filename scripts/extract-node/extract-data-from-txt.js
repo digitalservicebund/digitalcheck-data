@@ -68,9 +68,6 @@ function parseFile(file) {
     let respectiveDataFile = file.replace('.txt', '_data.json')
     let checkboxAndRadioData = JSON.parse(fs.readFileSync(respectiveDataFile));
 
-    console.log(textData);
-    console.log(checkboxAndRadioData);
-
     return {
         dcVersion: '1.2',
         ...textData,
