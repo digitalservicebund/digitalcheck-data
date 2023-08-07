@@ -32,5 +32,5 @@ npm i
 ### Usage
 
 ```
-./parse.sh -i <input-path> -o <output-file>
+./parse.sh -i <input-path> -o <output-file> -f <output-format> 
 ```
