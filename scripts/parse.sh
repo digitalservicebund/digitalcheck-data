@@ -6,9 +6,10 @@ INPUT_PATH=""
 OUTPUT_FILE=""
 OUTPUT_FORMAT=""
 OUTPUT_PATH="output"
+ASK_TO_OPEN=true
 
 _parse_options() {
-  while getopts ":hi:o:f:" option; do
+  while getopts ":hi:o:f:n" option; do
     case $option in
       h)
         _help
@@ -19,6 +20,8 @@ _parse_options() {
         OUTPUT_FILE=$OPTARG;;
       f)
         OUTPUT_FORMAT=$OPTARG;;
+      n)
+        ASK_TO_OPEN=false;;
       \?)
         echo "Error: Invalid option"
         _help
@@ -35,6 +38,7 @@ _help() {
   echo "-i                Input path"
   echo "-o                Output file"
   echo "-f                Output format (json or csv)"
+  echo "-n                Do not open file in the end"
   echo "-h                Display help"
 }
 
@@ -64,18 +68,20 @@ do
 done
 
 echo ""
-echo "Extracting data from all input files..."
+echo "Merge data from all input files..."
 node ./node/merge-all-data.js -i "$OUTPUT_PATH" -o "$OUTPUT_FILE" -f "$OUTPUT_FORMAT"
 
 echo ""
 echo "Saved data to $OUTPUT_FILE"
 echo ""
 
-while true; do
-    read -p "Do you want to open $OUTPUT_FILE? [y/n]: " yn
-    case $yn in
-        [Yy]* ) open "$OUTPUT_FILE"; break;;
-        [Nn]* ) exit;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
+if [ "$ASK_TO_OPEN" = true ] ; then
+    while true; do
+        read -p "Do you want to open $OUTPUT_FILE? [y/n]: " yn
+        case $yn in
+            [Yy]* ) open "$OUTPUT_FILE"; break;;
+            [Nn]* ) exit;;
+            * ) echo "Please answer yes or no.";;
+        esac
+    done
+fi
