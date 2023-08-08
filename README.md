@@ -20,6 +20,19 @@ Follow the steps below to parse Digitalcheck PDF documents:
 - Open a terminal in this root directory and run `./scripts/parse.sh`
 - Type `y` when asked if the file should be opened or manually open `scripts/output/data.[json|csv]`
 
+## Tooling 
+
+The scripts in this repository make use of the following tools:
+
+- [ghostscript](https://www.ghostscript.com/) to convert PDF to [PDF/A](https://en.wikipedia.org/wiki/PDF/A) 
+- [xpdf](https://www.xpdfreader.com/) to convert PDF to text or PostScript
+- [Adobe PDF Services API](https://developer.adobe.com/document-services/docs/overview/pdf-services-api/) to extract
+data and interactive fields (only works with interactive PDF documents created with Adobe tooling)
+- [pypdf](https://pypdf.readthedocs.io/en/stable/index.html) to extract text and interactive fields 
+(only works if the interactive fields are still interactive and not rendered differently)
+- [pdfplumber](https://github.com/jsvine/pdfplumber) to extract radio button and checkbox data by detecting 
+rectangles and circles 
+
 ## Contributing
 
 🇬🇧  
