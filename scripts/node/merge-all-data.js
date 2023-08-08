@@ -40,7 +40,7 @@ try {
 
         files.forEach(file => {
             if (file.endsWith('.txt')) {
-                let result = parseFile(inputPath + '/' + file);
+                let result = parseFile(inputPath, file);
                 data.push(result)
             }
         });
@@ -56,7 +56,8 @@ try {
     console.error(err);
 }
 
-function parseFile(file) {
+function parseFile(inputPath, filename) {
+    let file = inputPath + '/' + filename
     let inputText = fs.readFileSync(file, 'utf8');
     inputText = inputText.replace(/(\r\n|\n|\r|\f)/gm, "");
 
@@ -70,6 +71,7 @@ function parseFile(file) {
 
     return {
         dcVersion: '1.2',
+        dcFileName: getOriginalPDFFilename(filename),
         ...textData,
         ...checkboxAndRadioData
     };
@@ -81,6 +83,10 @@ function extractText(lowerBound, upperBound, txt) {
     let r = txt.match(re);
     if (r)
         return r[1].trim()
+}
+
+function getOriginalPDFFilename(filename) {
+    return filename.replace('.txt', '.pdf');
 }
 
 function saveToJsonFile(data, outputFile) {

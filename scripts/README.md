@@ -46,6 +46,7 @@ pipenv install
 The output file includes the following data:
 
 - **dcVersion**: Version of the Digitalcheck document,
+- **dcFileName**: Name of the original PDF document file,
 - **title**: Title of the policy (Regelung),
 - **preCheckExplanation**: Textfield of the pre-check on page 4 (Vorprüfung),
 - **impactOnExecution**: Textfield for explanation of the impact on the execution on page 12 (Einfluss auf Vollzug),
