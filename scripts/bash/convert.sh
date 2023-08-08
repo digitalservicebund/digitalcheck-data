@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 INPUT_FILE=""
 OUTPUT_FILE=""
 OUTPUT_FORMAT=""
