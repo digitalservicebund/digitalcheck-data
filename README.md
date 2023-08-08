@@ -3,12 +3,22 @@
 This repository contains scripts to automatically extract data from Digitalcheck documents (PDF) 
 to be used for evaluation and analysis purposes.
 
-⚠️ **Be warned:** The scripts in this repository are mostly work in progress.
+⚠️ **Be warned:** Some scripts in this repository are work in progress.
 
 ## Overview
 
 * The `scripts` directory contains the different scripts to parse Digitalcheck PDF documents.
 * The `resources` directory contains the Digitalcheck PDF documents.
+
+## Getting Started
+
+*Warning: Not tested for Windows systems*
+
+Follow the steps below to parse Digitalcheck PDF documents:
+
+- Copy the PDF files into `resources/real/`
+- Open a terminal in this root directory and run `./scripts/parse.sh`
+- Type `y` when asked if the file should be opened or manually open `scripts/output/data.[json|csv]`
 
 ## Contributing
 
