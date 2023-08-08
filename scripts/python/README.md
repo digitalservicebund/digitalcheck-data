@@ -1,9 +1,9 @@
-# Parse PDFs using pypdf
+# Parse PDF documents with Python
 
-## Extract data from PDF
+## Extract radion buttons and checkboxes
 
-The `extract-radios-and-checkboxes.py` script can be used to extract data (e.g. answers on radio buttons and checkboxes) 
-from PDF files.
+The `extract-radios-and-checkboxes.py` script can be used to extract answers on radio buttons and checkboxes 
+from PDF files using [pdfplumber](https://github.com/jsvine/pdfplumber). The data output is stored into a JSON file. 
 
 ### Install
 
@@ -16,10 +16,12 @@ pipenv install
 ```
  pipenv run python extract-radios-and-checkboxes.py -i <input-file> -o <output-file> 
 ```
+*Note: Use `.pdf` as input and `.json` as output file format.*
 
-## Extract text from PDF
+## Extract text
 
-The `extract-text.py` script can be used to extract text from PDF files.
+The `extract-text.py` script can be used to extract text from PDF files using
+[pypdf](https://pypdf.readthedocs.io/en/stable/index.html).
 
 ### Install
 
@@ -30,5 +32,6 @@ pipenv install
 ### Usage
 
 ```
- pipenv run python extract-text.py <path-to-pdf>
+ pipenv run python extract-text.py <input-file>
 ```
+*Note: Use `.pdf` as input file format.*

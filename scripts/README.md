@@ -2,9 +2,9 @@
 
 ## Overview 
 
-This directory contains scripts to parse PDF documents:
+This directory contains scripts to parse Digitalcheck PDF documents:
 
-- `parse.sh`: Parse PDF documents and extract JSON data (using the `bash/convert.sh` and `node/extract-data-from-text.js`)
+- `./parse.sh`: Utilizes different scripts to parse Digitalcheck PDF documents and extract data (more info below)
 - `bash/`: Bash script to convert PDF documents to different formats using
   [ghostscript](https://www.ghostscript.com/) and [xpdf](https://www.xpdfreader.com/)
 - `node/`: Node.js script(s) to extract JSON data from Digitalcheck PDF or text documents
@@ -15,12 +15,15 @@ This directory contains scripts to parse PDF documents:
 ## Parse 
 
 The `parse.sh` script can be used to parse all Digitalcheck PDF documents in a given directory and 
-extract data in JSON format. It uses the `bash/convert.sh` script to convert the PDF document to text 
-and the `node/extract-data-from-text.js` script to extract data from the text.
+extract its data. It uses `bash/convert.sh` to convert the PDF document to text and to PDF/A, the 
+`python/extract-radios-and-checkboxes.py` script to extract radio button and checkbox answers
+and `node/merge-all-data.js` script to merge the data from different sources.
 
 ### Prerequisites
 
 - [xpdf](https://www.xpdfreader.com/)
+- [ghostscript](https://www.ghostscript.com/)
+- [python](https://www.python.org/)
 
 ### Install
 

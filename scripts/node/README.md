@@ -1,8 +1,12 @@
-# Extract data from PDF documents
+# Parse PDF documents with Node.JS
 
-## Extract text from PDF
+## Merge data from different sources 
 
-The `merge-all-data.js` script can be used to extract data from text files.
+The `merge-all-data.js` script can be used to merge data extracted from a PDF document by `../bash/convert.sh` (text)
+and `../python/extract-radios-and-checkboxes.py` (JSON). The script iterates over all files in the given input path, 
+extracts part of the text data using the upper and lower bounds specified in `bounds.json` and merges this data
+with the extracted radio button and checkbox data. The merged data is stored in a file with one data row for each 
+input PDF file. 
 
 ### Install
 
@@ -15,9 +19,9 @@ npm i
 ```
 node merge-all-data.js -i <path-to-input-path> -o <path-to-output-file> -f <output-format>
 ```
+*Note: Use one of the following output formats: json, csv*
 
-
-## Extract JSON from PDF 
+## Extract data via PDF Services API
 
 The `extract-data.js` script can be used to extract data from PDF files using the [Adobe PDF Services API](https://developer.adobe.com/document-services/docs/overview/pdf-services-api/).
 
@@ -42,13 +46,13 @@ npm i
 ### Usage
 
 ```
-node extract-data.js <path-to-pdf>
+node extract-data.js <inout-file>
 ```
 
 ## Generate dummy data
 
-The `generate-dummy-data.js` script can be used to generate dummy data. The data includes NKR metadata and 
-data from the Digitalcheck documents.
+The `generate-dummy-data.js` script can be used to generate dummy data. The data includes data from the Digitalcheck 
+PDF documents and additional metadata.
 
 ### Install
 
