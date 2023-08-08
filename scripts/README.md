@@ -15,9 +15,10 @@ This directory contains scripts to parse Digitalcheck PDF documents:
 ## Parse 
 
 The `parse.sh` script can be used to parse all Digitalcheck PDF documents in a given directory and 
-extract its data. It uses `bash/convert.sh` to convert the PDF document to text and to PDF/A, the 
-`python/extract-radios-and-checkboxes.py` script to extract radio button and checkbox answers
-and `node/merge-all-data.js` script to merge the data from different sources.
+extract its data. It runs the following steps:
+1. Convert the PDF document to text and PDF/A using `bash/convert.sh` 
+2. Extract radio button and checkbox answers using It uses `python/extract-radios-and-checkboxes.py`
+3. Merge the data from different sources using `node/merge-all-data.js`
 
 ### Prerequisites
 
@@ -28,8 +29,10 @@ and `node/merge-all-data.js` script to merge the data from different sources.
 ### Install
 
 ```
-cd extract-node
+cd node
 npm i
+cd ../python
+pipenv install
 ```
 
 ### Usage
@@ -37,3 +40,29 @@ npm i
 ```
 ./parse.sh -i <input-path> -o <output-file> -f <output-format> 
 ```
+
+### Output
+
+The output file includes the following data:
+
+- **dcVersion**: Version of the Digitalcheck document,
+- **title**: Title of the rule (Regelung),
+- **preCheckExplanation**: Textfield of the pre-check on page 4 (Vorprüfung),
+- **impactOnExecution**: Textfield for explanation of the impact on the execution on page 12 (Einfluss auf Vollzug),
+- **impactOnRule**: Textfield for explanation of the impact on the rule on page 12 (Einfluss auf Regelung),
+- **principle1Explanation**: Textfield for explanation of answer on question regarding principle 1 on page 13,
+- **principle2Explanation**: Textfield for explanation of answer on question regarding principle 2 on page 14,
+- **principle3Explanation**: Textfield for explanation of answer on question regarding principle 3 on page 15,
+- **principle4Explanation**: Textfield for explanation of answer on question regarding principle 4 on page 16,
+- **principle5Explanation**: Textfield for explanation of answer on question regarding principle 5 on page 17,
+- **principle1Radio**: Answer on question regarding principle 1 on page 13,
+- **principle2Radio**: Answer on question regarding principle 2 on page 14,
+- **principle3Radio**: Answer on question regarding principle 3 on page 15,
+- **principle4Radio**: Answer on question regarding principle 4 on page 16,
+- **principle5Radio**: Answer on question regarding principle 5 on page 17,
+- **preCheck1**: Answer on question one of the pre-check on page 4 (true / false),
+- **preCheck2**: Answer on question two of the pre-check on page 4 (true / false),
+- **preCheck3**: Answer on question three of the pre-check on page 4 (true / false),
+- **preCheck4**: Answer on question four of the pre-check on page 4 (true / false),
+- **preCheck5**: Answer on question five of the pre-check on page 4 (true / false),
+- **preCheck6**: Answer on question six of the pre-check on page 4 (true / false)

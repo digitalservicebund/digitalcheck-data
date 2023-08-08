@@ -56,7 +56,7 @@ and not rendered by another PDF rendering engine (e.g. PDFium) or converted to P
 
 ### Radio Buttons and Checkboxes
 
-- None of the tested tools was able to detect and read data from radio buttons and checkboxes out of the box.
+- None of the tested [tools](#Tooling) was able to detect and read data from radio buttons and checkboxes out of the box.
 - To make it work, pdfplumber was used to detect circles and rectangles and do some calculations
 to find out which one was checked (as done in 
 [extract-radios-and-checkboxes.py](./scripts/python/extract-radios-and-checkboxes.py) 
