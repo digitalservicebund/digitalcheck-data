@@ -2,7 +2,7 @@
 
 ## Extract text from PDF
 
-The `extract-data-from-txt.js` script can be used to extract data from text files.
+The `merge-all-data.js` script can be used to extract data from text files.
 
 ### Install
 
@@ -13,13 +13,13 @@ npm i
 ### Usage
 
 ```
-node extract-data-from-txt.js -i <path-to-input-path> -o <path-to-output-file> -f <output-format>
+node merge-all-data.js -i <path-to-input-path> -o <path-to-output-file> -f <output-format>
 ```
 
 
 ## Extract JSON from PDF 
 
-The `extract-data-from-pdf.js` script can be used to extract data from PDF files using the [Adobe PDF Services API](https://developer.adobe.com/document-services/docs/overview/pdf-services-api/).
+The `extract-data.js` script can be used to extract data from PDF files using the [Adobe PDF Services API](https://developer.adobe.com/document-services/docs/overview/pdf-services-api/).
 
 ### Authentication
 
@@ -42,7 +42,7 @@ npm i
 ### Usage
 
 ```
-node extract-data-from-pdf.js <path-to-pdf>
+node extract-data.js <path-to-pdf>
 ```
 
 ## Generate dummy data
