@@ -46,10 +46,10 @@ pipenv install
 The output file includes the following data:
 
 - **dcVersion**: Version of the Digitalcheck document,
-- **title**: Title of the rule (Regelung),
+- **title**: Title of the policy (Regelung),
 - **preCheckExplanation**: Textfield of the pre-check on page 4 (Vorprüfung),
 - **impactOnExecution**: Textfield for explanation of the impact on the execution on page 12 (Einfluss auf Vollzug),
-- **impactOnRule**: Textfield for explanation of the impact on the rule on page 12 (Einfluss auf Regelung),
+- **impactOnRule**: Textfield for explanation of the impact on the policy on page 12 (Einfluss auf Regelung),
 - **principle1Explanation**: Textfield for explanation of answer on question regarding principle 1 on page 13,
 - **principle2Explanation**: Textfield for explanation of answer on question regarding principle 2 on page 14,
 - **principle3Explanation**: Textfield for explanation of answer on question regarding principle 3 on page 15,
