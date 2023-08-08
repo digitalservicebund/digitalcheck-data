@@ -10,7 +10,7 @@ This directory contains scripts to parse Digitalcheck PDF documents:
 - `node/`: Node.js script(s) to extract JSON data from Digitalcheck PDF or text documents
   (e.g. using the [Adobe PDF Services API](https://developer.adobe.com/document-services/docs/overview/pdf-services-api/))
 - `python/`: Python script(s) to extract data from PDF documents using
-  [pypdf](https://pypdf.readthedocs.io/en/stable/index.html)
+  [pypdf](https://pypdf.readthedocs.io/en/stable/index.html) and [pdfplumber](https://github.com/jsvine/pdfplumber)
 
 ## Parse 
 
