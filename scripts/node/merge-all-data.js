@@ -20,6 +20,7 @@ if (!args.hasOwnProperty('o')) {
 let inputPath = args.i
 let outputFile = args.o
 let outputFormat = 'json' // default
+let expectedNumberOfRows = null;
 
 if (args.hasOwnProperty('f')) {
     outputFormat = args.f
@@ -28,7 +29,9 @@ if (args.hasOwnProperty('f')) {
         process.exit(1);
     }
 }
-
+if (args.hasOwnProperty('n')) {
+    expectedNumberOfRows = args.n
+}
 
 try {
     fs.readdir(inputPath, async (err, files) => {
@@ -49,6 +52,13 @@ try {
             saveToJsonFile(data, outputFile);
         } else if (outputFormat === 'csv') {
             await saveToCsvFile(data, outputFile)
+        }
+
+        expectedNumberOfRows++
+
+        if (expectedNumberOfRows !== null && expectedNumberOfRows !== data.length) {
+            console.error(`\nERROR!\nERROR: Unexpected number of rows. Expected ${expectedNumberOfRows} but got ${data.length}.\nERROR!`)
+            process.exit(1);
         }
     });
 

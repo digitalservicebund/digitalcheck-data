@@ -9,6 +9,7 @@ OUTPUT_FILE=""
 OUTPUT_FORMAT=""
 OUTPUT_PATH="output"
 ASK_TO_OPEN=true
+NUMBER_OF_FILES=0
 
 _parse_options() {
   while getopts ":hi:o:f:n" option; do
@@ -34,7 +35,7 @@ _parse_options() {
 
 _help() {
   echo "Usage: ./parse.sh"
-  echo "Parse all PDF documents in the inout directory and extract data into the output JSON file."
+  echo "Parse all PDF documents in the input directory and extract data into the output JSON file."
   echo ""
   echo "Available options:"
   echo "-i                Input path"
@@ -56,6 +57,13 @@ for input_file in $INPUT_FILES
 do
   echo "Converting $input_file"
 
+  if [[ $input_file != *".pdf" ]]
+  then
+    echo "Skip $input_file since it is not of type PDF.";
+    continue
+  fi
+
+  ((NUMBER_OF_FILES++))
   input_file_name="$(basename -- "$input_file")"
   input_file_name=${input_file_name%".pdf"}
   output_file_txt="$OUTPUT_PATH/$input_file_name.txt"
@@ -71,7 +79,7 @@ done
 
 echo ""
 echo "Merge data from all input files..."
-node ./node/merge-all-data.js -i "$OUTPUT_PATH" -o "$OUTPUT_FILE" -f "$OUTPUT_FORMAT"
+node ./node/merge-all-data.js -i "$OUTPUT_PATH" -o "$OUTPUT_FILE" -f "$OUTPUT_FORMAT" -n "$NUMBER_OF_FILES"
 
 echo ""
 echo "Saved data to $OUTPUT_FILE"

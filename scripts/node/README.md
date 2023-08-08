@@ -17,9 +17,12 @@ npm i
 ### Usage
 
 ```
-node merge-all-data.js -i <path-to-input-path> -o <path-to-output-file> -f <output-format>
+node merge-all-data.js -i <path-to-input-directory> -o <path-to-output-file> -f <output-format> -n <number-of-expected-rows>
 ```
-*Note: Use one of the following output formats: json, csv*
+- **path-to-input-directory**: Path to input directory containing extracted data files
+- **path-to-output-file**: Path to output file to be created
+- **output-format**: Format of output file being one of: json, csv
+- **number-of-expected-rows**: Number of expected data rows (should be number of parsed PDF documents)
 
 ## Extract data via PDF Services API
 
@@ -46,7 +49,7 @@ npm i
 ### Usage
 
 ```
-node extract-data.js <inout-file>
+node extract-data.js <input-file>
 ```
 
 ## Generate dummy data
