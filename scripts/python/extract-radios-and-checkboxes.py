@@ -12,6 +12,13 @@ answers = {
 }
 
 
+def main():
+    arguments = parse_arguments()
+    create_output_directory(arguments['output_file'])
+    parse_pdf(arguments['input_file'], arguments['output_file'])
+    print("Successfully extracted data from " + arguments['input_file'])
+
+
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Just an example",
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -92,8 +99,5 @@ def find_checked_radio(radio_outline_y_positions, radio_check_y_position):
     return closest
 
 
-arguments = parse_arguments()
-create_output_directory(arguments['output_file'])
-parse_pdf(arguments['input_file'], arguments['output_file'])
-
-print("Done")
+if __name__ == "__main__":
+    main()
