@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 export NODE_NO_WARNINGS=1
 
 INPUT_PATH=""
