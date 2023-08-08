@@ -60,12 +60,12 @@ do
   ./bash/convert.sh -i "$input_file" -o "$output_file_pdfa" -f "pdfa"
 
   echo "Read checkboxes and radio buttons from $input_file"
-  python ./python/extract-data-from-pdf.py -i "$output_file_pdfa" -o "$output_file_data"
+  python ./python/extract-radios-and-checkboxes.py -i "$output_file_pdfa" -o "$output_file_data"
 done
 
 echo ""
 echo "Extracting data from all input files..."
-node ./node/extract-data-from-txt.js -i "$OUTPUT_PATH" -o "$OUTPUT_FILE" -f "$OUTPUT_FORMAT"
+node ./node/merge-all-data.js -i "$OUTPUT_PATH" -o "$OUTPUT_FILE" -f "$OUTPUT_FORMAT"
 
 echo ""
 echo "Done"
