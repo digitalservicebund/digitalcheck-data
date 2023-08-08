@@ -68,4 +68,14 @@ echo "Extracting data from all input files..."
 node ./node/merge-all-data.js -i "$OUTPUT_PATH" -o "$OUTPUT_FILE" -f "$OUTPUT_FORMAT"
 
 echo ""
-echo "Done"
+echo "Saved data to $OUTPUT_FILE"
+echo ""
+
+while true; do
+    read -p "Do you want to open $OUTPUT_FILE? [y/n]: " yn
+    case $yn in
+        [Yy]* ) open "$OUTPUT_FILE"; break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
