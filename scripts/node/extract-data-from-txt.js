@@ -48,7 +48,7 @@ try {
         if (outputFormat === 'json') {
             saveToJsonFile(data, outputFile);
         } else if (outputFormat === 'csv') {
-            saveToCsvFile(data, outputFile)
+            await saveToCsvFile(data, outputFile)
         }
     });
 
