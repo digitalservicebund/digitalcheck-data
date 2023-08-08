@@ -19,7 +19,7 @@ if (!args.hasOwnProperty('o')) {
 
 let inputPath = args.i
 let outputFile = args.o
-let outputFormat = 'json'
+let outputFormat = 'json' // default
 
 if (args.hasOwnProperty('f')) {
     outputFormat = args.f

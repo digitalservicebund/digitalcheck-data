@@ -39,10 +39,14 @@ def parse_pdf(input_file, output_file):
         checkbox_data = extract_pre_check_answers(pdf.pages[3])
         data = radio_button_data | checkbox_data
 
-        json_file = open(output_file, "w")
-        json_field = json.dumps(data)
-        json_file.write(json_field)
-        json_file.close()
+        save_to_json_file(data, output_file)
+
+
+def save_to_json_file(data, output_file):
+    json_file = open(output_file, "w")
+    json_field = json.dumps(data)
+    json_file.write(json_field)
+    json_file.close()
 
 
 def extract_pre_check_answers(page):
@@ -64,25 +68,28 @@ def extract_answer_on_page(page):
     if len(radio_outline_y_positions) == 0:
         return None
     radio_outline_y_positions.sort(reverse=True)
+
     radio_check_y_positions = [curve['y0'] for curve in page.curves if curve["height"] < 8]
     if len(radio_check_y_positions) > 1:
-        print("Too many checks.")
+        print("Too many checkmarks. Exactly one radio button must be checked.")
         sys.exit()
+
     checked_radio = find_checked_radio(radio_outline_y_positions, radio_check_y_positions[0])
     return answers[checked_radio]
 
 
 def find_checked_radio(radio_outline_y_positions, radio_check_y_position):
-    nearest = None
+    # Find radio button outline which is closest to the checkmark by calculating the distance of the y position
+    closest = None
     distances = {}
-    for i, radio_outline in enumerate(radio_outline_y_positions):
-        distances[i] = abs(radio_outline - radio_check_y_position)
-        if nearest is None:
-            nearest = i
+    for i, radio_outline_y_position in enumerate(radio_outline_y_positions):
+        distances[i] = abs(radio_outline_y_position - radio_check_y_position)
+        if closest is None:
+            closest = i
         else:
-            if distances[i] < distances[nearest]:
-                nearest = i
-    return nearest
+            if distances[i] < distances[closest]:
+                closest = i
+    return closest
 
 
 arguments = parse_arguments()
