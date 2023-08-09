@@ -87,11 +87,12 @@ function parseFile(inputPath, filename) {
 }
 
 function extractText(lowerBound, upperBound, txt) {
-    let pattern = escapeStringRegexp(lowerBound) + '(.*)' + escapeStringRegexp(upperBound)
+    let pattern = escapeStringRegexp(lowerBound) + '(.*?)' + escapeStringRegexp(upperBound)
     let re = new RegExp(pattern, "i");
     let r = txt.match(re);
     if (r)
         return r[1].trim()
+    return ""
 }
 
 function getOriginalPDFFilename(filename) {
