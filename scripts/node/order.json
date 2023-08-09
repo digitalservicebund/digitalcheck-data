@@ -1,0 +1,23 @@
+[
+  "title",
+  "dcFileName",
+  "dcVersion",
+  "impactOnExecution",
+  "impactOnRule",
+  "preCheck1",
+  "preCheck2",
+  "preCheck3",
+  "preCheck4",
+  "preCheck5",
+  "preCheck6",
+  "principle1Radio",
+  "principle1Explanation",
+  "principle2Radio",
+  "principle2Explanation",
+  "principle3Radio",
+  "principle3Explanation",
+  "principle4Radio",
+  "principle4Explanation",
+  "principle5Radio",
+  "principle5Explanation"
+]
