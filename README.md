@@ -12,7 +12,7 @@ to be used for evaluation and analysis purposes.
 Follow the steps below to parse Digitalcheck PDF documents:
 
 - Copy the PDF files into `resources/real/`
-- Open a terminal in this root directory and run `./scripts/parse.sh`
+- Open a terminal in this root directory and run `./scripts/parse.sh -i "../resources/real/" -o "output/data.csv" -f "csv"`
 - Type `y` when asked if the file should be opened or manually open `scripts/output/data.[json|csv]`
 
 ## Overview
