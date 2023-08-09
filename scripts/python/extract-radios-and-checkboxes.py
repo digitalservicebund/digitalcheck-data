@@ -78,8 +78,11 @@ def extract_answer_on_page(page):
 
     radio_check_y_positions = [curve['y0'] for curve in page.curves if curve["height"] < 8]
     if len(radio_check_y_positions) > 1:
-        print("Too many checkmarks. Exactly one radio button must be checked.")
-        sys.exit()
+        print("ERROR: Too many checkmarks on page " + str(page.page_number)
+              + ". Exactly one radio button must be checked.")
+        return 'ERROR'
+    elif len(radio_check_y_positions) < 1:
+        return None
 
     checked_radio = find_checked_radio(radio_outline_y_positions, radio_check_y_positions[0])
     return answers[checked_radio]
