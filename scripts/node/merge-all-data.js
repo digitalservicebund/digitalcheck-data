@@ -3,6 +3,7 @@
 import escapeStringRegexp from 'escape-string-regexp';
 import * as fs from 'fs';
 import bounds from './bounds.json' assert { type: 'json' };
+import order from './order.json' assert { type: 'json' };
 import minimist from 'minimist';
 import ObjectsToCsv from "objects-to-csv";
 
@@ -77,12 +78,12 @@ function parseFile(inputPath, filename) {
     let respectiveDataFile = file.replace('.txt', '_data.json')
     let checkboxAndRadioData = JSON.parse(fs.readFileSync(respectiveDataFile));
 
-    return {
+    return sortObjectAttributes({
         dcVersion: '1.2',
         dcFileName: getOriginalPDFFilename(filename),
         ...textData,
         ...checkboxAndRadioData
-    };
+    }, order);
 }
 
 function extractText(lowerBound, upperBound, txt) {
@@ -105,4 +106,16 @@ function saveToJsonFile(data, outputFile) {
 async function saveToCsvFile(data, outputFile) {
     const csv = new ObjectsToCsv(data);
     await csv.toDisk(outputFile);
+}
+
+function sortObjectAttributes(obj, keyOrder) {
+    const sortedObj = {};
+
+    keyOrder.forEach(key => {
+        if (obj.hasOwnProperty(key)) {
+            sortedObj[key] = obj[key];
+        }
+    });
+
+    return sortedObj;
 }
