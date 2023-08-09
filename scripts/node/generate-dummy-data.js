@@ -38,6 +38,7 @@ function generateRow() {
         datePreCheckReceived: getRandomDate(),
         dateDCReceived: getRandomDate(),
         dcVersion: '1.2',
+        filename: getRandomTextInRange(2, 4).replace(" ", "_") + ".pdf",
 
         title: getRandomTextInRange(2, 8),
 
