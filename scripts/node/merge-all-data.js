@@ -54,8 +54,6 @@ try {
             await saveToCsvFile(data, outputFile)
         }
 
-        expectedNumberOfRows++
-
         if (expectedNumberOfRows !== null && expectedNumberOfRows !== data.length) {
             console.error(`\nERROR!\nERROR: Unexpected number of rows. Expected ${expectedNumberOfRows} but got ${data.length}.\nERROR!`)
             process.exit(1);
