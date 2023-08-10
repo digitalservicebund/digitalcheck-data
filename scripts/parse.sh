@@ -87,7 +87,7 @@ echo ""
 
 if [ "$ASK_TO_OPEN" = true ] ; then
     while true; do
-        read -p "Do you want to open $OUTPUT_FILE? [y/n]: " yn
+        read -rp "Do you want to open $OUTPUT_FILE? [y/n]: " yn
         case $yn in
             [Yy]* ) open "$OUTPUT_FILE"; break;;
             [Nn]* ) exit;;
