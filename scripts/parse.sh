@@ -7,12 +7,15 @@ export NODE_NO_WARNINGS=1
 INPUT_PATH=""
 OUTPUT_FILE=""
 OUTPUT_FORMAT=""
-OUTPUT_PATH="output"
 ASK_TO_OPEN=true
 NUMBER_OF_FILES=0
+TMP_DIR="tmp"
+CLEAR_TMP_FILES=false
+
+SCRIPT_DIR="$(dirname "$0")"
 
 _parse_options() {
-  while getopts ":hi:o:f:n" option; do
+  while getopts ":hi:o:f:nc" option; do
     case $option in
       h)
         _help
@@ -25,6 +28,8 @@ _parse_options() {
         OUTPUT_FORMAT=$OPTARG;;
       n)
         ASK_TO_OPEN=false;;
+      c)
+        CLEAR_TMP_FILES=true;;
       \?)
         echo "Error: Invalid option"
         _help
@@ -42,12 +47,13 @@ _help() {
   echo "-o                Output file"
   echo "-f                Output format (json or csv)"
   echo "-n                Do not open file in the end"
+  echo "-c                Clear temporary files afterwards"
   echo "-h                Display help"
 }
 
 _parse_options "$@"
 
-OUTPUT_DIR="$(dirname "${OUTPUT_FILE}")"
+OUTPUT_DIR="$(dirname "${OUTPUT_FILE}")/$TMP_DIR"
 mkdir -p "$OUTPUT_DIR"
 
 echo "Converting all input files in $INPUT_PATH"
@@ -66,24 +72,28 @@ do
   ((NUMBER_OF_FILES++))
   input_file_name="$(basename -- "$input_file")"
   input_file_name=${input_file_name%".pdf"}
-  output_file_txt="$OUTPUT_PATH/$input_file_name.txt"
-  output_file_pdfa="$OUTPUT_PATH/$input_file_name.a.pdf"
-  output_file_data="$OUTPUT_PATH/${input_file_name}_data.json"
+  output_file_txt="$OUTPUT_DIR/$input_file_name.txt"
+  output_file_pdfa="$OUTPUT_DIR/$input_file_name.a.pdf"
+  output_file_data="$OUTPUT_DIR/${input_file_name}_data.json"
 
-  ./bash/convert.sh -i "$input_file" -o "$output_file_txt" -f "txt"
-  ./bash/convert.sh -i "$input_file" -o "$output_file_pdfa" -f "pdfa"
+  "$SCRIPT_DIR/bash/convert.sh" -i "$input_file" -o "$output_file_txt" -f "txt"
+  "$SCRIPT_DIR/bash/convert.sh" -i "$input_file" -o "$output_file_pdfa" -f "pdfa"
 
   echo "Read checkboxes and radio buttons from $input_file"
-  python ./python/extract-radios-and-checkboxes.py -i "$output_file_pdfa" -o "$output_file_data"
+  python "$SCRIPT_DIR/python/extract-radios-and-checkboxes.py" -i "$output_file_pdfa" -o "$output_file_data"
 done
 
 echo ""
 echo "Merge data from all input files..."
-node ./node/merge-all-data.js -i "$OUTPUT_PATH" -o "$OUTPUT_FILE" -f "$OUTPUT_FORMAT" -n "$NUMBER_OF_FILES"
+node "$SCRIPT_DIR/node/merge-all-data.js" -i "$OUTPUT_DIR" -o "$OUTPUT_FILE" -f "$OUTPUT_FORMAT" -n "$NUMBER_OF_FILES"
 
 echo ""
 echo "Saved data to $OUTPUT_FILE"
 echo ""
+
+if [ "$CLEAR_TMP_FILES" = true ] ; then
+    rm -rf "$OUTPUT_DIR"
+fi
 
 if [ "$ASK_TO_OPEN" = true ] ; then
     while true; do
