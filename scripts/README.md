@@ -41,6 +41,14 @@ pipenv install
 ./parse.sh -i <input-path> -o <output-file> -f <output-format> 
 ```
 
+### Test
+
+```
+../test/test-parse.sh 
+```
+
+*Note: See [test/README.md](../test/README.md) for more info.* 
+
 ### Output
 
 The output file includes the following data:
