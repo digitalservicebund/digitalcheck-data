@@ -19,6 +19,7 @@ Follow the steps below to parse Digitalcheck PDF documents:
 
 * The `scripts` directory contains the different scripts to parse Digitalcheck PDF documents.
 * The `resources` directory contains the Digitalcheck PDF documents.
+* The `test` directory contains tests to test the scripts.
 
 ## Tooling 
 
