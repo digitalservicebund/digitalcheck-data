@@ -77,7 +77,12 @@ do
   output_file_data="$OUTPUT_DIR/${input_file_name}_data.json"
 
   "$SCRIPT_DIR/bash/convert.sh" -i "$input_file" -o "$output_file_txt" -f "txt"
-  "$SCRIPT_DIR/bash/convert.sh" -i "$input_file" -o "$output_file_pdfa" -f "pdfa"
+
+  if [ -e "$output_file_pdfa" ]; then
+      echo "Skip converting to PDF/A. File already exists."
+  else
+      "$SCRIPT_DIR/bash/convert.sh" -i "$input_file" -o "$output_file_pdfa" -f "pdfa"
+  fi
 
   echo "Read checkboxes and radio buttons from $input_file"
   python "$SCRIPT_DIR/python/extract-radios-and-checkboxes.py" -i "$output_file_pdfa" -o "$output_file_data"
