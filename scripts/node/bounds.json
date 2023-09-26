@@ -5,6 +5,11 @@
     "upperBound": "Der Vollzug der Regelung wird voraussichtlich"
   },
   {
+    "name": "title2",
+    "lowerBound": "Titel der Regelung",
+    "upperBound": "Alle Fragen in der begleitenden Dokumentation"
+  },
+  {
     "name": "preCheckExplanation",
     "lowerBound": "Bitte erläutern Sie hier das Ergebnis:",
     "upperBound": "*Beteiligte sind in diesem Zusammenhang"
