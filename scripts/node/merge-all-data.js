@@ -7,6 +7,9 @@ import order from './order.json' assert { type: 'json' };
 import minimist from 'minimist';
 import ObjectsToCsv from "objects-to-csv";
 
+const TITLE_BOUND_NAME = 'title'; // must be the same as in bounds.json
+const TITLE_2_BOUND_NAME = 'title2'; // must be the same as in bounds.json
+
 const args = minimist(process.argv.slice(2));
 
 if (!args.hasOwnProperty('i')) {
@@ -75,6 +78,10 @@ function parseFile(inputPath, filename) {
         textData[bound.name] = extractText(bound.lowerBound, bound.upperBound, inputText)
     })
 
+    if (textData[TITLE_BOUND_NAME] === "") {
+        textData[TITLE_BOUND_NAME] = textData[TITLE_2_BOUND_NAME]
+    }
+
     let respectiveDataFile = file.replace('.txt', '_data.json')
     let checkboxAndRadioData = JSON.parse(fs.readFileSync(respectiveDataFile));
 
@@ -87,12 +94,16 @@ function parseFile(inputPath, filename) {
 }
 
 function extractText(lowerBound, upperBound, txt) {
-    let pattern = escapeStringRegexp(lowerBound) + '(.*?)' + escapeStringRegexp(upperBound)
+    let pattern = matchShortestStringBetween(lowerBound, upperBound)
     let re = new RegExp(pattern, "i");
     let r = txt.match(re);
     if (r)
         return r[1].trim()
     return ""
+}
+
+function matchShortestStringBetween(lowerBound, upperBound) {
+    return escapeStringRegexp(lowerBound) + '((?:(?!' + lowerBound + ').)*?)' + escapeStringRegexp(upperBound);
 }
 
 function getOriginalPDFFilename(filename) {
