@@ -1,5 +1,6 @@
 # Real Digitalcheck documents
 resources/real
+resources/nkr-data
 
 # Output
 **/output
