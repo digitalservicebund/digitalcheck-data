@@ -79,7 +79,7 @@ function parseFile(inputPath, filename) {
     return sortObjectAttributes({
         'Version_DC': '1.2',
         'NKRNr': getFirstMatch('_([0-9]+)_', filename),
-        'Dateiname': getOriginalPDFFilename(filename),
+        'Dateiname_DC': getOriginalPDFFilename(filename),
         ...textData,
         ...checkboxAndRadioData
     }, order);
