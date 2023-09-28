@@ -2,13 +2,13 @@
 
 import escapeStringRegexp from 'escape-string-regexp';
 import * as fs from 'fs';
-import bounds from './bounds.json' assert { type: 'json' };
-import order from './order.json' assert { type: 'json' };
+import textFields from './textFields.json' assert {type: 'json'};
+import order from './order.json' assert {type: 'json'};
 import minimist from 'minimist';
 import ObjectsToCsv from "objects-to-csv";
 
-const TITLE_BOUND_NAME = 'title'; // must be the same as in bounds.json
-const TITLE_2_BOUND_NAME = 'title2'; // must be the same as in bounds.json
+const TITLE_BOUND_NAME = 'Titel_DC'; // must be the same as in textFields.json
+const TITLE_2_BOUND_NAME = 'Titel2_DC'; // must be the same as in textFields.json
 
 const args = minimist(process.argv.slice(2));
 
@@ -74,8 +74,8 @@ function parseFile(inputPath, filename) {
     inputText = inputText.replace(/(\r\n|\n|\r|\f)/gm, "");
 
     let textData = {}
-    bounds.forEach(bound => {
-        textData[bound.name] = extractText(bound.lowerBound, bound.upperBound, inputText)
+    textFields.forEach(field => {
+        textData[field.name] = extractTextBetween(field.lowerBound, field.upperBound, inputText)
     })
 
     if (textData[TITLE_BOUND_NAME] === "") {
@@ -86,15 +86,19 @@ function parseFile(inputPath, filename) {
     let checkboxAndRadioData = JSON.parse(fs.readFileSync(respectiveDataFile));
 
     return sortObjectAttributes({
-        dcVersion: '1.2',
-        dcFileName: getOriginalPDFFilename(filename),
+        'Version_DC': '1.2',
+        'NKRNr': getFirstMatch('_([0-9]+)_', filename),
+        'Dateiname': getOriginalPDFFilename(filename),
         ...textData,
         ...checkboxAndRadioData
     }, order);
 }
 
-function extractText(lowerBound, upperBound, txt) {
-    let pattern = matchShortestStringBetween(lowerBound, upperBound)
+function extractTextBetween(lowerBound, upperBound, txt) {
+    return getFirstMatch(matchShortestStringBetween(lowerBound, upperBound), txt);
+}
+
+function getFirstMatch(pattern, txt) {
     let re = new RegExp(pattern, "i");
     let r = txt.match(re);
     if (r)

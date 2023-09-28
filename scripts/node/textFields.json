@@ -1,51 +1,51 @@
 [
   {
-    "name": "title",
+    "name": "Titel_DC",
     "lowerBound": "Titel der Regelung",
     "upperBound": "Der Vollzug der Regelung wird voraussichtlich"
   },
   {
-    "name": "title2",
+    "name": "Titel2_DC",
     "lowerBound": "Titel der Regelung",
     "upperBound": "Alle Fragen in der begleitenden Dokumentation"
   },
   {
-    "name": "preCheckExplanation",
+    "name": "VP_Erläuterung",
     "lowerBound": "Bitte erläutern Sie hier das Ergebnis:",
     "upperBound": "*Beteiligte sind in diesem Zusammenhang"
   },
   {
-    "name": "impactOnExecution",
+    "name": "ED_AuswirkungVollzug_Schritte",
     "lowerBound": "formelle Beteiligungsverfahren.",
     "upperBound": "Wie spiegeln sich die Erkenntnisse"
   },
   {
-    "name": "impactOnRule",
+    "name": "ED_AuswirkungVollzug_Regelung",
     "lowerBound": "die zum Beispiel den Vollzug regeln.",
     "upperBound": "12"
   },
   {
-    "name": "principle1Explanation",
+    "name": "ED1_Kommunikation_Erläuterung",
     "lowerBound": "Zum Beispiel: “Online-Beratung wird ermöglicht, siehe § 1a (2)”.Ja Nein Teilweise Nicht relevantErläuterung:",
     "upperBound": "13Prinzip 2"
   },
   {
-    "name": "principle2Explanation",
+    "name": "ED2_Daten_Erläuterung",
     "lowerBound": "Zum Beispiel: “Datenstandard definiert, siehe § 3a, rechtliche Voraussetzung zum Datenaustausch geschaffen, siehe § 3b”.Ja Nein Teilweise Nicht relevantErläuterung:",
     "upperBound": "14Prinzip 3"
   },
   {
-    "name": "principle3Explanation",
+    "name": "ED3_Datenschutz_Erläuterung",
     "lowerBound": "Zum Beispiel: “Bedingungen für die Verwendung von Kontaktdaten, siehe § 1a (2)”.Ja Nein Teilweise Nicht relevantErläuterung:",
     "upperBound": "15Prinzip 4"
   },
   {
-    "name": "principle4Explanation",
+    "name": "ED4_Klarheit_Erläuterung",
     "lowerBound": "Zum Beispiel: “Hinweis auf Begriffsdefinitionen, siehe § 1a (2); Voraussetzungen, Pauschalen und Freibeträge für Leistungsbezug definiert, siehe § 5”.Ja Nein Teilweise Nicht relevantErläuterung:",
     "upperBound": "16Prinzip 5"
   },
   {
-    "name": "principle5Explanation",
+    "name": "ED5_Automatisierung_Erläuterung",
     "lowerBound": " Zum Beispiel: “Verzicht auf persönliches Erscheinen, siehe § 4”.Ja Nein Teilweise Nicht relevantErläuterung:",
     "upperBound": "Das passiert als Nächstes"
   }
