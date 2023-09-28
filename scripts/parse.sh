@@ -5,9 +5,7 @@ set -euo pipefail
 export NODE_NO_WARNINGS=1
 
 INPUT_PATH=""
-OUTPUT_FILE=""
-OUTPUT_FORMAT=""
-ASK_TO_OPEN=true
+OUTPUT_PATH=""
 NUMBER_OF_FILES=0
 TMP_DIR="tmp"
 CLEAR_TMP_FILES=false
@@ -15,7 +13,7 @@ CLEAR_TMP_FILES=false
 SCRIPT_DIR="$(dirname "$0")"
 
 _parse_options() {
-  while getopts ":hi:o:f:nc" option; do
+  while getopts ":hi:o:c" option; do
     case $option in
       h)
         _help
@@ -23,11 +21,7 @@ _parse_options() {
       i)
         INPUT_PATH=$OPTARG;;
       o)
-        OUTPUT_FILE=$OPTARG;;
-      f)
-        OUTPUT_FORMAT=$OPTARG;;
-      n)
-        ASK_TO_OPEN=false;;
+        OUTPUT_PATH=$OPTARG;;
       c)
         CLEAR_TMP_FILES=true;;
       \?)
@@ -44,17 +38,15 @@ _help() {
   echo ""
   echo "Available options:"
   echo "-i                Input path"
-  echo "-o                Output file"
-  echo "-f                Output format (json or csv)"
-  echo "-n                Do not open file in the end"
+  echo "-o                Output path"
   echo "-c                Clear temporary files afterwards"
   echo "-h                Display help"
 }
 
 _parse_options "$@"
 
-OUTPUT_DIR="$(dirname "${OUTPUT_FILE}")/$TMP_DIR"
-mkdir -p "$OUTPUT_DIR"
+OUTPUT_DIR_TMP="$OUTPUT_PATH/$TMP_DIR"
+mkdir -p "$OUTPUT_DIR_TMP"
 
 echo "Converting all input files in $INPUT_PATH"
 echo ""
@@ -72,9 +64,9 @@ do
   ((NUMBER_OF_FILES++))
   input_file_name="$(basename -- "$input_file")"
   input_file_name=${input_file_name%".pdf"}
-  output_file_txt="$OUTPUT_DIR/$input_file_name.txt"
-  output_file_pdfa="$OUTPUT_DIR/$input_file_name.a.pdf"
-  output_file_data="$OUTPUT_DIR/${input_file_name}_data.json"
+  output_file_txt="$OUTPUT_DIR_TMP/$input_file_name.txt"
+  output_file_pdfa="$OUTPUT_DIR_TMP/$input_file_name.a.pdf"
+  output_file_data="$OUTPUT_DIR_TMP/${input_file_name}_data.json"
 
   "$SCRIPT_DIR/bash/convert.sh" -i "$input_file" -o "$output_file_txt" -f "txt"
 
@@ -90,23 +82,12 @@ done
 
 echo ""
 echo "Merge data from all input files..."
-node "$SCRIPT_DIR/node/merge-all-data.js" -i "$OUTPUT_DIR" -o "$OUTPUT_FILE" -f "$OUTPUT_FORMAT" -n "$NUMBER_OF_FILES"
+node "$SCRIPT_DIR/node/merge-all-data.js" -i "$OUTPUT_DIR_TMP" -o "$OUTPUT_PATH" -n "$NUMBER_OF_FILES"
 
 echo ""
-echo "Saved data to $OUTPUT_FILE"
+echo "Saved data to $OUTPUT_PATH"
 echo ""
 
 if [ "$CLEAR_TMP_FILES" = true ] ; then
-    rm -rf "$OUTPUT_DIR"
-fi
-
-if [ "$ASK_TO_OPEN" = true ] ; then
-    while true; do
-        read -rp "Do you want to open $OUTPUT_FILE? [y/n]: " yn
-        case $yn in
-            [Yy]* ) open "$OUTPUT_FILE"; break;;
-            [Nn]* ) exit;;
-            * ) echo "Please answer yes or no.";;
-        esac
-    done
+    rm -rf "$OUTPUT_DIR_TMP"
 fi
