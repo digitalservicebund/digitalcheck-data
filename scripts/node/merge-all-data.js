@@ -23,8 +23,11 @@ if (!args.hasOwnProperty('o')) {
 
 let inputPath = args.i
 let outputPath = args.o
-let expectedNumberOfRows = null;
 
+let expectedNumberOfRows = null;
+if (args.hasOwnProperty('n')) {
+    expectedNumberOfRows = args.n
+}
 
 try {
     parseFiles();
