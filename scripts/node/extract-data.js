@@ -15,7 +15,7 @@ const fs = require('fs');
 
 const outputPath = "output/";
 const jsonPath = outputPath + "json/";
-let inputFile = 'resources/test/digitalcheck-example.pdf';
+let inputFile = 'resources/test/dc-example_1_default.pdf';
 
 try {
     if (process.argv.length === 2) {
