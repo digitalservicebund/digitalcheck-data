@@ -2,13 +2,14 @@
 
 import escapeStringRegexp from 'escape-string-regexp';
 import * as fs from 'fs';
-import textFields from './textFields.json' assert {type: 'json'};
+import textFields_1_2_1 from './textFields_v1.2.1.json' assert {type: 'json'};
+import textFields_1_2_2 from './textFields_v1.2.2.json' assert {type: 'json'};
 import order from './order.json' assert {type: 'json'};
 import minimist from 'minimist';
 import ObjectsToCsv from 'objects-to-csv';
 
-const TITLE_BOUND_NAME = 'Titel_DC'; // must be the same as in textFields.json
-const TITLE_2_BOUND_NAME = 'Titel2_DC'; // must be the same as in textFields.json
+const TITLE_BOUND_NAME = 'Titel_DC'; // must be the same as in textFields_v1.2.2.json
+const TITLE_2_BOUND_NAME = 'Titel2_DC'; // must be the same as in textFields_v1.2.2.json
 
 const args = minimist(process.argv.slice(2));
 
@@ -66,6 +67,11 @@ function parseFile(inputPath, filename) {
 
     let inputText = fs.readFileSync(file, 'utf8');
     inputText = inputText.replace(/(\r\n|\n|\r|\f)/gm, "");
+
+    let textFields = textFields_1_2_2
+    if (inputText.indexOf("Begründung (optional):") !== -1) {
+        textFields = textFields_1_2_1
+    }
 
     let textData = {}
     textFields.forEach(field => {
