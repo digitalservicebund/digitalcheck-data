@@ -79,6 +79,8 @@ function parseFile(inputPath, filename) {
         data[TITLE_BOUND_NAME] = data[TITLE_2_BOUND_NAME]
     }
 
+    analyzeData(data);
+
     let respectiveDataFile = file.replace('.txt', '_data.json')
     let checkboxAndRadioData = JSON.parse(fs.readFileSync(respectiveDataFile));
 
@@ -109,6 +111,25 @@ function getFirstMatch(pattern, txt) {
 
 function matchShortestStringBetween(lowerBound, upperBound) {
     return escapeStringRegexp(lowerBound) + '((?:(?!' + lowerBound + ').)*?)' + escapeStringRegexp(upperBound);
+}
+
+function analyzeData(data) {
+    for (const [key, value] of Object.entries(data)) {
+        data[key + "_wc"] = countWords(value);
+        data[key + "_§"] = countOccurrences(value, "§")
+    }
+}
+
+function countOccurrences(string, substring) {
+    const regex = new RegExp(substring, 'g');
+    const matches = string.match(regex);
+    return matches ? matches.length : 0;
+}
+
+function countWords(inputString) {
+    const words = inputString.split(/\s+/);
+    const filteredWords = words.filter(word => word.length > 0);
+    return filteredWords.length;
 }
 
 function getOriginalPDFFilename(filename) {
