@@ -68,18 +68,15 @@ function parseFile(inputPath, filename) {
     let inputText = fs.readFileSync(file, 'utf8');
     inputText = inputText.replace(/(\r\n|\n|\r|\f)/gm, "");
 
-    let textFields = textFields_1_2_2
-    if (inputText.indexOf("Begründung (optional):") !== -1) {
-        textFields = textFields_1_2_1
-    }
+    let textFields = getTextFieldsByVersion(inputText);
 
-    let textData = {}
+    let data = {}
     textFields.forEach(field => {
-        textData[field.name] = extractTextBetween(field.lowerBound, field.upperBound, inputText)
+        data[field.name] = extractTextBetween(field.lowerBound, field.upperBound, inputText)
     })
 
-    if (textData[TITLE_BOUND_NAME] === "") {
-        textData[TITLE_BOUND_NAME] = textData[TITLE_2_BOUND_NAME]
+    if (data[TITLE_BOUND_NAME] === "") {
+        data[TITLE_BOUND_NAME] = data[TITLE_2_BOUND_NAME]
     }
 
     let respectiveDataFile = file.replace('.txt', '_data.json')
@@ -89,9 +86,13 @@ function parseFile(inputPath, filename) {
         'Version_DC': '1.2',
         'NKRNr': getFirstMatch('_([0-9]+)_', filename),
         'Dateiname_DC': getOriginalPDFFilename(filename),
-        ...textData,
+        ...data,
         ...checkboxAndRadioData
     }, order);
+}
+
+function getTextFieldsByVersion(inputText) {
+    return inputText.indexOf("Begründung (optional):") === -1 ? textFields_1_2_2 : textFields_1_2_1;
 }
 
 function extractTextBetween(lowerBound, upperBound, txt) {
