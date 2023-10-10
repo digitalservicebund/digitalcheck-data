@@ -121,6 +121,8 @@ function saveToJsonFile(data, outputFile) {
 }
 
 async function saveToCsvFile(data, outputFile) {
+    convertAllBooleanToString(data)
+
     const csv = new ObjectsToCsv(data);
     await csv.toDisk(outputFile);
 }
@@ -135,4 +137,14 @@ function sortObjectAttributes(obj, keyOrder) {
     });
 
     return sortedObj;
+}
+
+function convertAllBooleanToString(data) {
+    data.forEach(element => {
+        for (const [key, value] of Object.entries(element)) {
+            if (typeof value === 'boolean') {
+                element[key] = value ? 'TRUE' : 'FALSE';
+            }
+        }
+    })
 }
