@@ -1,17 +1,21 @@
+import csv
+import json
+import os
+
 import texthero as hero
 import pandas as pd
 from texthero import preprocessing
 from nltk.corpus import stopwords
-import matplotlib.pyplot as plt
 from textblob import TextBlob
 
-NUM_TOP_WORDS = 20
+NUM_TOP_WORDS = 10
+OUTPUT_DIR = "output/"
 
 
 def main():
     # Read data
     data = pd.read_csv(
-        "../output/data-nlp-test.csv"
+        "../output/parsed-data.csv"
     )
 
     # Preprocess / clean data
@@ -19,25 +23,73 @@ def main():
                        preprocessing.remove_punctuation,
                        preprocessing.remove_urls,
                        preprocessing.remove_whitespace]
-    data['text'] = data['text'].pipe(hero.clean, custom_cleaning)
 
-    data['text'] = data['text'].apply(clean_paragraphs)
-    data['text'] = data['text'].apply(clean_egs)
-    data['noun_phrases'] = data['text'].apply(extract_noun_phrases)
-    data['text'] = data['text'].apply(replace_stopwords)
+    with open('order.json', 'r') as file:
+        data_fields = json.load(file)
 
-    # print(data.to_string())
+    top_words_per_field = get_top_words_per_field(custom_cleaning, data, data_fields)
+    write_to_csv(convert_to_headers(data_fields), transpose_list(top_words_per_field), "top_words_per_field.csv")
 
-    # Find most used words
-    top_words = hero.visualization.top_words(data['text']).head(NUM_TOP_WORDS)
-    print(top_words.head(NUM_TOP_WORDS))
-    top_words.plot.bar(rot=90, title="Top words")
+    top_words_per_dc = get_top_words_per_dc(data, data_fields)
+    write_to_csv(convert_to_headers(data['NKRNr'].values.tolist()), transpose_list(top_words_per_dc),
+                 "top_words_per_dc.csv")
 
-    # Create word cloud plot
-    hero.wordcloud(data.text, max_words=20)
 
-    # Render all plots
-    plt.show(block=True)
+def get_top_words_per_dc(data, data_fields):
+    top_words_per_dc = []
+    for i, row in data.iterrows():
+        dc_text = ""
+        for field in data_fields:
+            processed_field = field + '_clean'
+            if row[processed_field]:
+                dc_text = dc_text + row[processed_field]
+
+        top_words = hero.visualization.top_words(pd.Series([dc_text], copy=False)).head(NUM_TOP_WORDS)
+        top_words_per_dc.append(top_words.keys().tolist())
+        top_words_per_dc.append(top_words.values.tolist())
+    return top_words_per_dc
+
+
+def get_top_words_per_field(custom_cleaning, data, data_fields):
+    top_words_per_field = []
+    for field in data_fields:
+        processed_field = field + '_clean'
+        data[processed_field] = data[field].pipe(hero.clean, custom_cleaning)
+
+        data[processed_field] = data[processed_field].apply(clean_paragraphs)
+        data[processed_field] = data[processed_field].apply(clean_egs)
+        data['noun_phrases'] = data[processed_field].apply(extract_noun_phrases)
+        data[processed_field] = data[processed_field].apply(replace_stopwords)
+
+        # Find most used words
+        top_words = hero.visualization.top_words(data[processed_field]).head(NUM_TOP_WORDS)
+
+        top_words_per_field.append(top_words.keys().tolist())
+        top_words_per_field.append(top_words.values.tolist())
+    return top_words_per_field
+
+
+def convert_to_headers(list):
+    headers = []
+    for element in list:
+        prefix = str(element)
+        headers.append(prefix + '_word')
+        headers.append(prefix + '_count')
+    return headers
+
+
+def transpose_list(top_words_per_field):
+    transposed_list = [[row[i] for row in top_words_per_field] for i in range(len(top_words_per_field[0]))]
+    return transposed_list
+
+
+def write_to_csv(headers, rows, filename):
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    with open(OUTPUT_DIR + filename, "w") as stream:
+        writer = csv.writer(stream)
+        writer.writerow(headers)
+        for row in rows:
+            writer.writerow(row)
 
 
 def clean_paragraphs(x):
@@ -60,7 +112,6 @@ def extract_noun_phrases(x):
         if len(phrase.split()) > 1:
             frequent_phrases[phrase] = count
     sorted_phrases = dict(sorted(frequent_phrases.items(), key=lambda item: item[1]))
-    print(sorted_phrases)
     return sorted_phrases
 
 
