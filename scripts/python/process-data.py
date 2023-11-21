@@ -7,6 +7,7 @@ import pandas as pd
 from texthero import preprocessing
 from nltk.corpus import stopwords
 from textblob import TextBlob
+from itertools import zip_longest
 
 NUM_TOP_WORDS = 10
 OUTPUT_DIR = "output/"
@@ -79,7 +80,7 @@ def convert_to_headers(list):
 
 
 def transpose_list(top_words_per_field):
-    transposed_list = [[row[i] for row in top_words_per_field] for i in range(len(top_words_per_field[0]))]
+    transposed_list = list(zip_longest(*top_words_per_field, fillvalue=''))
     return transposed_list
 
 
