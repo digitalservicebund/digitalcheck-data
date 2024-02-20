@@ -76,7 +76,7 @@ do
       "$SCRIPT_DIR/bash/convert.sh" -i "$input_file" -o "$output_file_pdfa" -f "pdfa"
   fi
 
-  echo "Read checkboxes and radio buttons from $input_file"
+  echo "Read checkboxes and radio buttons from $output_file_pdfa"
   python "$SCRIPT_DIR/python/extract-radios-and-checkboxes.py" -i "$output_file_pdfa" -o "$output_file_data"
 done
 
