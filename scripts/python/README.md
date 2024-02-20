@@ -2,8 +2,19 @@
 
 ## Install
 
+Install [pipenv](https://pipenv.pypa.io/en/latest):
+```
+pip install pipenv --user
+```
+
+Create virtual environment and install required dependencies locally:
 ```
 pipenv install
+```
+
+Activate virtual environment
+```
+pipenv shell
 ```
 
 ## Extract radion buttons and checkboxes
