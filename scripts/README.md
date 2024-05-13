@@ -25,6 +25,12 @@ extract its data. It runs the following steps:
 - [xpdf](https://www.xpdfreader.com/)
 - [ghostscript](https://www.ghostscript.com/)
 - [python](https://www.python.org/)
+- pipenv: `pip install pipenv --user`
+- if pipenv path is not set or pipenv cannot find python:
+  - set pipenv as path variable
+  - `pipenv --python python path/to/python`
+- install pdfplumber: `pip install pdfplumber --user` 
+
 
 ### Install
 
