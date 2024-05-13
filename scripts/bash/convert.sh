@@ -42,6 +42,15 @@ _parse_options "$@"
 OUTPUT_DIR="$(dirname "${OUTPUT_FILE}")"
 mkdir -p "$OUTPUT_DIR"
 
+if [[ "$OSTYPE" == "linux-gnu"* || "$OSTYPE" == "darwin"* ]]; then
+    GS_CMD="gs"
+elif [[ "$OSTYPE" == "cygwin"* || "$OSTYPE" == "msys"* || "$OSTYPE" == "win32" ]]; then
+    GS_CMD="gswin64"
+else
+    echo "Unsupported operating system."
+    exit 1
+fi
+
 case $OUTPUT_FORMAT in
   txt)
     # Convert to text
@@ -55,7 +64,7 @@ case $OUTPUT_FORMAT in
 
   pdfa)
     # Convert to PDF/A
-    gs -q -dPDFA -dBATCH -dNOPAUSE -dNOOUTERSAVE -sProcessColorModel=DeviceCMYK -sDEVICE=pdfwrite -sPDFACompatibilityPolicy=1 -sOutputFile="${OUTPUT_FILE}" "${INPUT_FILE}"
+    "$GS_CMD" -q -dPDFA -dBATCH -dNOPAUSE -dNOOUTERSAVE -sProcessColorModel=DeviceCMYK -sDEVICE=pdfwrite -sPDFACompatibilityPolicy=1 -sOutputFile="${OUTPUT_FILE}" "${INPUT_FILE}"
     ;;
 
   *)

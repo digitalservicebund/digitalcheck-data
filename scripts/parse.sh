@@ -61,7 +61,7 @@ do
     continue
   fi
 
-  ((NUMBER_OF_FILES++))
+  NUMBER_OF_FILES=$((NUMBER_OF_FILES + 1))
   input_file_name="$(basename -- "$input_file")"
   input_file_name=${input_file_name%".pdf"}
   output_file_txt="$OUTPUT_DIR_TMP/$input_file_name.txt"
