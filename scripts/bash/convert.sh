@@ -64,7 +64,7 @@ case $OUTPUT_FORMAT in
 
   pdfa)
     # Convert to PDF/A
-    "$GS_CMD" -q -dPDFA -dBATCH -dNOPAUSE -dNOOUTERSAVE -sProcessColorModel=DeviceCMYK -sDEVICE=pdfwrite -sPDFACompatibilityPolicy=1 -sOutputFile="${OUTPUT_FILE}" "${INPUT_FILE}"
+    "$GS_CMD" -q -dPDFA -dBATCH -dNOPAUSE -dNOOUTERSAVE -sProcessColorModel=DeviceCMYK -sDEVICE=pdfwrite -dPDFACompatibilityPolicy=1 -sOutputFile="${OUTPUT_FILE}" "${INPUT_FILE}"
     ;;
 
   *)
