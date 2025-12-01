@@ -6,8 +6,8 @@ name = "pypi"
 [packages]
 pypdf = "*"
 pdfplumber = "*"
-texthero = "*"
-textblob = "*"
+#texthero = "*"
+#textblob = "*"
 
 [dev-packages]
 
