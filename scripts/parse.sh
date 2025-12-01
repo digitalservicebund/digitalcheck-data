@@ -77,7 +77,7 @@ do
   fi
 
   echo "Read checkboxes and radio buttons from $output_file_pdfa"
-  python "$SCRIPT_DIR/python/extract-radios-and-checkboxes.py" -i "$output_file_pdfa" -o "$output_file_data"
+  PIPENV_PIPFILE=./python/Pipfile pipenv run python "$SCRIPT_DIR/python/extract-radios-and-checkboxes.py" -i "$output_file_pdfa" -o "$output_file_data" || echo "error processing $output_file_pdfa"
 done
 
 echo ""
