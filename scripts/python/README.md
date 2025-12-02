@@ -41,6 +41,20 @@ The `extract-text.py` script can be used to extract text from PDF files using
 ```
 *Note: Use `.pdf` as input file format.*
 
+## Convert to Markdown
+
+The `generate-md.py` script can be used to convert the `parsed-data.json` file into a more LLM-compatible
+Markdown file, with different filters.
+
+Paths are currently hardcoded.
+
+### Usage
+
+```shell
+# execute in the root of this repository
+pipenv run python scripts/python/generate-md.py
+```
+
 ## Process data
 
 ⚠️ **Warning:** This is work in process.
