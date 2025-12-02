@@ -37,9 +37,9 @@ extract its data. It runs the following steps:
 ```
 cd node
 npm i
-cd ../python
-pipenv install
 ```
+
+For Python, refer to the installation instructions in [python/README.md](./python/README.md).
 
 ### Usage
 
