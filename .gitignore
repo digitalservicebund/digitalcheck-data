@@ -7,3 +7,5 @@ resources/nkr-data
 
 # IntelliJ
 .idea
+
+.DS_Store
