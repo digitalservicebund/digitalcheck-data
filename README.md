@@ -1,9 +1,9 @@
 # Digitalcheck Data
 
-This repository contains scripts to automatically extract data from Digitalcheck documents (PDF) 
+This repository contains scripts to automatically extract data from Digitalcheck documentations (PDF) 
 to be used for evaluation and analysis purposes.
 
-⚠️ **Be warned:** Some scripts in this repository are work in progress.
+⚠️ **Be warned:** Some scripts in this repository are work in progress, out of date or don't work with the newest versions of the documentation.
 
 ## Getting Started
 
