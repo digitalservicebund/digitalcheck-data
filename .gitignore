@@ -9,3 +9,4 @@ resources/nkr-data
 .idea
 
 .DS_Store
+**/.env
